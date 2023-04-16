@@ -1,0 +1,58 @@
+name: /v
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Set board variable from secret
+      run: |
+        echo "board=v" >> $GITHUB_ENV
+        git clone $HF
+        cd 4chan-datasets
+        git config --global user.email "${EMAIL}"
+        git config --global user.name "${USERNAME}"
+      env:
+        HF: ${{ secrets.HF }}
+        EMAIL: ${{ secrets.EMAIL }}
+        USERNAME: ${{ secrets.USERNAME }}
+
+
+    - name: Create board directory
+      run: mkdir -p /home/runner/work/4chan-datasets/4chan-datasets/4chan-datasets/${{ env.board }}
+
+    - name: Install dependencies
+      run: |
+        pip install playwright
+        playwright install chromium
+
+    - name: Run 4chan script for each page
+      run: |
+        cd /home/runner/work/4chan-datasets/4chan-datasets/4chan-datasets/${{ env.board }}
+        python /home/runner/work/4chan-datasets/4chan-datasets/4chan.py -b ${{ env.board }}
+        for page in {2..10}
+        do
+            python /home/runner/work/4chan-datasets/4chan-datasets/4chan.py -b ${{ env.board }} -p $page
+        done
+
+    - name: Commit and push changes
+      run: |
+        cd /home/runner/work/4chan-datasets/4chan-datasets/4chan-datasets/
+        git add --all
+        git commit -am "$(date)"
+        git push "${{ secrets.DATA_REPO }}"
