@@ -2,7 +2,7 @@ name: /lit
 
 on:
   schedule:
-    - cron: '0 */24 * * *'
+    - cron: '0 9 * * *'
   workflow_dispatch:
 
 jobs:

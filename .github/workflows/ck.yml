@@ -2,7 +2,7 @@ name: /ck
 
 on:
   schedule:
-    - cron: '0 */24 * * *'
+    - cron: '45 3 * * *'
   workflow_dispatch:
 
 jobs:

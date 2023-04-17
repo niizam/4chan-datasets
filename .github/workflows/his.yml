@@ -2,7 +2,7 @@ name: /his
 
 on:
   schedule:
-    - cron: '0 */24 * * *'
+    - cron: '45 6 * * *'
   workflow_dispatch:
 
 jobs:

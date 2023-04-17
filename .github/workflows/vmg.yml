@@ -2,7 +2,7 @@ name: /vmg
 
 on:
   schedule:
-    - cron: '0 */24 * * *'
+    - cron: '15 17 * * *'
   workflow_dispatch:
 
 jobs:

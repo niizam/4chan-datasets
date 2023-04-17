@@ -2,7 +2,7 @@ name: /trash
 
 on:
   schedule:
-    - cron: '0 */24 * * *'
+    - cron: '0 15 * * *'
   workflow_dispatch:
 
 jobs:

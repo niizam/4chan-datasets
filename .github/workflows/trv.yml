@@ -2,7 +2,7 @@ name: /trv
 
 on:
   schedule:
-    - cron: '0 */24 * * *'
+    - cron: '45 15 * * *'
   workflow_dispatch:
 
 jobs:

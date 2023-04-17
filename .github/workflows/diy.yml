@@ -2,7 +2,7 @@ name: /diy
 
 on:
   schedule:
-    - cron: '0 */24 * * *'
+    - cron: '15 5 * * *'
   workflow_dispatch:
 
 jobs:
