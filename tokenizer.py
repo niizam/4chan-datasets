@@ -63,6 +63,3 @@ if __name__ == '__main__':
 
     formatted_data = format_data(input_file)
     save_data(formatted_data, output_file, file_format=file_format)
-
-# Tokenize the posts
-tokenized_data = tokenize_posts(formatted_data)
