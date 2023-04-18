@@ -3,7 +3,7 @@ import re
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 def run(playwright: Playwright, board: str, page_num: int) -> None:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.firefox.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
     # Navigate to the current page
